@@ -45,7 +45,7 @@ import androidx.preference.PreferenceFragment;
 import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
-import com.spark.support.preferences.SystemSettingSwitchPreference;
+import com.spark.settings.preferences.SystemSettingSwitchPreference;
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.internal.util.spark.SparkUtils;
 
