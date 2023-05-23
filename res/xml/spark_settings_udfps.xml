@@ -34,7 +34,7 @@
             android:key="udfps_pressedicon_picker"
             android:title="@string/udfps_pressed_color_title"
             android:summary="@string/udfps_pressed_color_summary"
-            android:fragment="com.alpha.settings.fragments.UdfpsPressedIconPicker" />
+            android:fragment="com.spark.settings.fragments.UdfpsPressedIconPicker" />
 
     </PreferenceCategory>
 
