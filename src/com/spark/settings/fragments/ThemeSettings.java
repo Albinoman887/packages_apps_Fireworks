@@ -1,8 +1,5 @@
 package com.spark.settings.fragments;
 
-import static android.os.UserHandle.USER_CURRENT;
-import static android.os.UserHandle.USER_SYSTEM;
-
 import com.android.internal.logging.nano.MetricsProto;
 
 import android.os.Bundle;
@@ -71,7 +68,7 @@ public class ThemeSettings extends SettingsPreferenceFragment implements
     private static final String USE_STOCK_LAYOUT = "use_stock_layout";
     private static final String ABOUT_PHONE_STYLE = "about_card_style";
     private static final String HIDE_USER_CARD = "hide_user_card";
-    private static final String PREF_TILE_ANIM_STYLE = "qs_tile_animation_style";
+        private static final String PREF_TILE_ANIM_STYLE = "qs_tile_animation_style";
     private static final String PREF_TILE_ANIM_DURATION = "qs_tile_animation_duration";
     private static final String PREF_TILE_ANIM_INTERPOLATOR = "qs_tile_animation_interpolator";
 
@@ -158,7 +155,7 @@ public class ThemeSettings extends SettingsPreferenceFragment implements
 
         mTileAnimationStyle = (ListPreference) findPreference(PREF_TILE_ANIM_STYLE);
         int tileAnimationStyle = Settings.System.getIntForUser(resolver,
-                Settings.System.QS_TILE_ANIMATION_STYLE, 0, UserHandle.USER_CURRENT);
+                Settings.System.ANIM_TILE_STYLE, 0, UserHandle.USER_CURRENT);
         mTileAnimationStyle.setValue(String.valueOf(tileAnimationStyle));
         updateTileAnimationStyleSummary(tileAnimationStyle);
         updateAnimTileStyle(tileAnimationStyle);
@@ -166,14 +163,14 @@ public class ThemeSettings extends SettingsPreferenceFragment implements
 
         mTileAnimationDuration = (ListPreference) findPreference(PREF_TILE_ANIM_DURATION);
         int tileAnimationDuration = Settings.System.getIntForUser(resolver,
-                Settings.System.QS_TILE_ANIMATION_DURATION, 2000, UserHandle.USER_CURRENT);
+                Settings.System.ANIM_TILE_DURATION, 2000, UserHandle.USER_CURRENT);
         mTileAnimationDuration.setValue(String.valueOf(tileAnimationDuration));
         updateTileAnimationDurationSummary(tileAnimationDuration);
         mTileAnimationDuration.setOnPreferenceChangeListener(this);
 
         mTileAnimationInterpolator = (ListPreference) findPreference(PREF_TILE_ANIM_INTERPOLATOR);
         int tileAnimationInterpolator = Settings.System.getIntForUser(getContentResolver(),
-                Settings.System.QS_TILE_ANIMATION_INTERPOLATOR, 0, UserHandle.USER_CURRENT);
+                Settings.System.ANIM_TILE_INTERPOLATOR, 0, UserHandle.USER_CURRENT);
         mTileAnimationInterpolator.setValue(String.valueOf(tileAnimationInterpolator));
         updateTileAnimationInterpolatorSummary(tileAnimationInterpolator);
         mTileAnimationInterpolator.setOnPreferenceChangeListener(this);
@@ -232,20 +229,20 @@ public class ThemeSettings extends SettingsPreferenceFragment implements
             return true;
          } else if (preference == mTileAnimationStyle) {
             int tileAnimationStyle = Integer.valueOf((String) newValue);
-            Settings.System.putIntForUser(resolver, Settings.System.QS_TILE_ANIMATION_STYLE,
+            Settings.System.putIntForUser(resolver, Settings.System.ANIM_TILE_STYLE,
                     tileAnimationStyle, UserHandle.USER_CURRENT);
             updateTileAnimationStyleSummary(tileAnimationStyle);
             updateAnimTileStyle(tileAnimationStyle);
             return true;
         } else if (preference == mTileAnimationDuration) {
             int tileAnimationDuration = Integer.valueOf((String) newValue);
-            Settings.System.putIntForUser(resolver, Settings.System.QS_TILE_ANIMATION_DURATION,
+            Settings.System.putIntForUser(resolver, Settings.System.ANIM_TILE_DURATION,
                     tileAnimationDuration, UserHandle.USER_CURRENT);
             updateTileAnimationDurationSummary(tileAnimationDuration);
             return true;
         } else if (preference == mTileAnimationInterpolator) {
             int tileAnimationInterpolator = Integer.valueOf((String) newValue);
-            Settings.System.putIntForUser(resolver, Settings.System.QS_TILE_ANIMATION_INTERPOLATOR,
+            Settings.System.putIntForUser(resolver, Settings.System.ANIM_TILE_INTERPOLATOR,
                     tileAnimationInterpolator, UserHandle.USER_CURRENT);
             updateTileAnimationInterpolatorSummary(tileAnimationInterpolator);
             return true;
