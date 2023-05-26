@@ -114,6 +114,15 @@
             android:entryValues="@array/qs_tile_animation_interpolator_values"
             android:persistent="false" />
 
+        <com.spark.settings.preferences.SystemSettingListPreference
+            android:key="qs_panel_style"
+            android:title="@string/qs_styles_title"
+            android:summary="%s"
+            android:dialogTitle="@string/qs_styles_title"
+            android:entries="@array/qs_styles_entries"
+            android:entryValues="@array/qs_styles_values"
+            android:defaultValue="0" />
+
     </PreferenceCategory>
 
     <PreferenceCategory
@@ -184,7 +193,7 @@
             android:defaultValue="true" />
     </PreferenceCategory>
 
-    <PreferenceCategory 
+    <PreferenceCategory
          android:title="@string/qs_footer_category">
 
         <com.spark.settings.preferences.SystemSettingSwitchPreference
@@ -294,7 +303,7 @@
             android:key="volume_panel_on_left"
             android:title="@string/volume_panel_on_left_title" />
 
-    <!-- Volume Styles -->      
+    <!-- Volume Styles -->
     <com.spark.settings.preferences.SystemSettingListPreference
          android:key="custom_volume_styles"
          android:title="@string/volume_style_title"
@@ -323,7 +332,7 @@
          android:summary="%s"
          android:defaultValue="0" />
 
-    <!-- Settings Greetings -->    
+    <!-- Settings Greetings -->
     <com.spark.settings.preferences.SystemSettingSwitchPreference
           android:key="settings_contextual_messages"
           android:title="@string/settings_contextual_message_title"
@@ -335,20 +344,20 @@
           android:title="@string/settings_user_card_title"
           android:summary="@string/settings_user_card_summary"
           android:defaultValue="false" />
-          
+
     <com.spark.settings.preferences.SystemSettingSwitchPreference
           android:key="use_stock_layout"
           android:title="@string/settings_home_style_title"
           android:summary="@string/settings_home_style_summary"
           android:defaultValue="false" />
-       
+
     <com.spark.settings.preferences.SystemSettingSwitchPreference
           android:key="settings_header_image_random"
           android:title="@string/settings_header_image_random_title"
           android:summary="@string/settings_header_image_random_summary"
           android:defaultValue="false" />
 
-    <!-- Settings Header - todo: replace with picker api -->    
+    <!-- Settings Header - todo: replace with picker api -->
     <com.spark.settings.preferences.SystemSettingSeekBarPreference
         android:key="settings_header_image"
         android:title="@string/settings_header_image_title"
@@ -377,7 +386,7 @@
          android:entryValues="@array/settings_dashboard_style_values"
          android:summary="%s"
          android:defaultValue="0" />
-         
+
     </PreferenceCategory>
 
 </PreferenceScreen>
