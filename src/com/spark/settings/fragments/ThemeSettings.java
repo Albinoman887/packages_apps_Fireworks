@@ -1,106 +1,115 @@
 package com.spark.settings.fragments;
 
-import static android.os.UserHandle.USER_CURRENT;
-import static android.os.UserHandle.USER_SYSTEM;
-
-import com.android.internal.logging.nano.MetricsProto;
-
-import android.os.Bundle;
+import android.content.ContentResolver;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
-import android.os.UserHandle;
-import android.content.Context;
+import android.content.res.Resources;
 import android.database.ContentObserver;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.SystemProperties;
-import android.content.ContentResolver;
-import android.content.res.Resources;
-import androidx.preference.ListPreference;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceGroup;
-import androidx.preference.PreferenceScreen;
-import androidx.preference.PreferenceCategory;
-import androidx.preference.Preference.OnPreferenceChangeListener;
-import androidx.preference.PreferenceFragment;
-import androidx.preference.SwitchPreference;
-import android.provider.Settings;
-import com.android.settings.R;
-import lineageos.providers.LineageSettings;
-import com.spark.settings.preferences.CustomSeekBarPreference;
-
-import com.spark.settings.preferences.SystemSettingListPreference;
-import com.spark.settings.preferences.SystemSettingSwitchPreference;
-import com.spark.settings.preferences.SystemSettingEditTextPreference;
-import java.util.Locale;
-import android.text.TextUtils;
-import android.view.View;
-
-import com.android.settings.SettingsPreferenceFragment;
-import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settingslib.search.SearchIndexable;
-import com.android.settings.Utils;
-import android.util.Log;
-import com.android.internal.util.spark.ThemeUtils;
-import com.android.internal.util.spark.SparkUtils;
-
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Map;
-import java.util.HashMap;
-import java.util.Collections;
-
-import android.content.om.IOverlayManager;
 import android.os.RemoteException;
 import android.os.ServiceManager;
+import android.os.SystemProperties;
+import android.provider.Settings;
+import android.text.TextUtils;
+import android.util.Log;
+import android.view.View;
+
+import androidx.preference.ListPreference;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceCategory;
+import androidx.preference.PreferenceFragment;
+import androidx.preference.PreferenceGroup;
+import androidx.preference.PreferenceScreen;
+import androidx.preference.SwitchPreference;
+
+import com.android.internal.logging.nano.MetricsProto;
+import com.android.internal.util.spark.SparkUtils;
+import com.android.internal.util.spark.ThemeUtils;
+import com.android.settings.R;
+import com.android.settings.SettingsPreferenceFragment;
+import com.android.settings.Utils;
+import com.android.settings.development.OverlayCategoryPreferenceController;
+import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settingslib.search.SearchIndexable;
+import com.android.settings.preferences.CustomSeekBarPreference;
+import com.android.settings.preferences.SystemSettingEditTextPreference;
+import com.android.settings.preferences.SystemSettingListPreference;
+import com.android.settings.preferences.SystemSettingSwitchPreference;
+import com.spark.settings.preferences.SystemSettingListPreference;
+import com.spark.settings.preferences.SystemSettingSwitchPreference;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.regex.Pattern;
+
 import org.json.JSONException;
 import org.json.JSONObject;
-import java.util.regex.Pattern;
-import com.android.settings.development.OverlayCategoryPreferenceController;
+
+import android.content.om.IOverlayManager;
+import static android.os.UserHandle.USER_CURRENT;
+import static android.os.UserHandle.USER_SYSTEM;
+import lineageos.providers.LineageSettings;
 
 @SearchIndexable
 public class ThemeSettings extends SettingsPreferenceFragment implements
         OnPreferenceChangeListener {
 
+    // Quick settings constants
+    private static final String KEY_SHOW_AUTO_BRIGHTNESS = "qs_show_auto_brightness";
     private static final String KEY_SHOW_BRIGHTNESS_SLIDER = "qs_show_brightness_slider";
     private static final String KEY_BRIGHTNESS_SLIDER_POSITION = "qs_brightness_slider_position";
-    private static final String KEY_SHOW_AUTO_BRIGHTNESS = "qs_show_auto_brightness";
+    private static final String PREF_TILE_ANIM_DURATION = "qs_tile_animation_duration";
+    private static final String PREF_TILE_ANIM_INTERPOLATOR = "qs_tile_animation_interpolator";
+    private static final String PREF_TILE_ANIM_STYLE = "qs_tile_animation_style";
+    private static final String QS_PANEL_STYLE = "qs_panel_style";
+
+    // Heads-up notification constants
     private static final String HEADS_UP_TIMEOUT_PREF = "heads_up_timeout";
+
+    // Volume panel constants
     private static final String KEY_VOLUME_PANEL_LEFT = "volume_panel_on_left";
 
+    // Settings constants
+    private static final String ABOUT_PHONE_STYLE = "about_card_style";
+    private static final String HIDE_USER_CARD = "hide_user_card";
+    private static final String SETTINGS_CONTEXTUAL_MESSAGES = "settings_contextual_messages";
     private static final String SETTINGS_DASHBOARD_STYLE = "settings_dashboard_style";
     private static final String SETTINGS_HEADER_IMAGE = "settings_header_image";
     private static final String SETTINGS_HEADER_IMAGE_RANDOM = "settings_header_image_random";
     private static final String SETTINGS_HEADER_TEXT = "settings_header_text";
     private static final String SETTINGS_HEADER_TEXT_ENABLED = "settings_header_text_enabled";
-    private static final String SETTINGS_CONTEXTUAL_MESSAGES = "settings_contextual_messages";
     private static final String USE_STOCK_LAYOUT = "use_stock_layout";
-    private static final String ABOUT_PHONE_STYLE = "about_card_style";
-    private static final String HIDE_USER_CARD = "hide_user_card";
-    private static final String PREF_TILE_ANIM_STYLE = "qs_tile_animation_style";
-    private static final String PREF_TILE_ANIM_DURATION = "qs_tile_animation_duration";
-    private static final String PREF_TILE_ANIM_INTERPOLATOR = "qs_tile_animation_interpolator";
-    private static final String QS_PANEL_STYLE  = "qs_panel_style";
 
-    private ThemeUtils mThemeUtils;
     private Handler mHandler;
+    private ThemeUtils mThemeUtils;
     private IOverlayManager mOverlayManager;
     private IOverlayManager mOverlayService;
-    private SystemSettingListPreference mQsStyle;
-    private SystemSettingListPreference mSettingsDashBoardStyle;
-    private ListPreference mTileAnimationStyle;
-    private ListPreference mTileAnimationDuration;
-    private SystemSettingListPreference mAboutPhoneStyle;
-    private ListPreference mTileAnimationInterpolator;
-    private SystemSettingSwitchPreference mUseStockLayout;
-    private SystemSettingSwitchPreference mHideUserCard;
+
     private Preference mSettingsHeaderImage;
     private Preference mSettingsHeaderImageRandom;
     private Preference mSettingsMessage;
+
     private SystemSettingEditTextPreference mSettingsHeaderText;
     private SystemSettingSwitchPreference mSettingsHeaderTextEnabled;
+
+    private SystemSettingSwitchPreference mUseStockLayout;
+    private SystemSettingSwitchPreference mHideUserCard;
+
+    private ListPreference mTileAnimationStyle;
+    private ListPreference mTileAnimationDuration;
+    private ListPreference mTileAnimationInterpolator;
+
+    private SystemSettingListPreference mQsStyle;
+    private SystemSettingListPreference mSettingsDashBoardStyle;
+    private SystemSettingListPreference mAboutPhoneStyle;
 
     private SwitchPreference mVolumePanelLeft;
     private CustomSeekBarPreference mHeadsUpTimeOut;
