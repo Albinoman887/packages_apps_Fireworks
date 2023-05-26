@@ -418,9 +418,9 @@ public class Buttons extends SettingsPreferenceFragment implements
         }
 
         mAlertSlider = (SystemSettingSwitchPreference) prefScreen.findPreference(ALERT_SLIDER_PREF);
-       // boolean mAlertSliderAvailable = res.getBoolean(
-      //          com.android.internal.R.bool.config_hasAlertSlider);
-       // if (!mAlertSliderAvailable)
+        boolean mAlertSliderAvailable = res.getBoolean(
+                com.android.internal.R.bool.config_hasAlertSlider);
+        if (!mAlertSliderAvailable)
             prefScreen.removePreference(mAlertSlider);
     }
 
@@ -696,10 +696,10 @@ public class Buttons extends SettingsPreferenceFragment implements
 
                     keys.add(KEY_ADDITIONAL_BUTTONS);
 
-                 //  boolean mAlertSliderAvailable = res.getBoolean(
-                  //          com.android.internal.R.bool.config_hasAlertSlider);
-                  //  if (!mAlertSliderAvailable)
-                   //     keys.add(ALERT_SLIDER_PREF);
+                   boolean mAlertSliderAvailable = res.getBoolean(
+                            com.android.internal.R.bool.config_hasAlertSlider);
+                    if (!mAlertSliderAvailable)
+                        keys.add(ALERT_SLIDER_PREF);
 
                     return keys;
                 }
