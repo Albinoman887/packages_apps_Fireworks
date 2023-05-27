@@ -145,11 +145,11 @@
         <com.spark.settings.preferences.SystemSettingSeekBarPreference
             android:key="qs_tile_label_size"
             android:title="@string/qs_tile_label_size_title"
-            android:max="15"
+            android:max="16"
             settings:min="10"
             settings:interval="1"
             settings:units="sp"
-            android:defaultValue="14" />
+            android:defaultValue="13" />
 
         <com.spark.settings.preferences.SystemSettingSwitchPreference
             android:key="qs_tile_vertical_layout"
