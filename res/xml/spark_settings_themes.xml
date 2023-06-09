@@ -168,12 +168,6 @@
         android:key="qs_layout_category"
         android:title="@string/qs_layout_category_title">
 
-        <!-- com.spark.settings.preferences.SystemSettingSwitchPreference
-            android:key="qs_tile_label_hide"
-            android:title="@string/qs_tile_label_hide_title"
-            android:summary="@string/qs_tile_label_hide_summary"
-            android:defaultValue="false" / -->
-
         <com.spark.settings.preferences.SystemSettingSeekBarPreference
             android:key="qs_tile_label_size"
             android:title="@string/qs_tile_label_size_title"
