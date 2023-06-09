@@ -125,34 +125,6 @@
             android:max="74"
             android:min="0" />
 
-        <ListPreference
-            android:key="qs_tile_animation_style"
-            android:title="@string/qs_tile_animation_style_title"
-            android:entries="@array/qs_tile_animation_style_entries"
-            android:entryValues="@array/qs_tile_animation_style_values"
-            android:persistent="false" />
-
-        <ListPreference
-            android:key="qs_tile_animation_duration"
-            android:title="@string/qs_tile_animation_duration_title"
-            android:entries="@array/qs_tile_animation_duration_entries"
-            android:entryValues="@array/qs_tile_animation_duration_values"
-            android:persistent="false" />
-
-        <ListPreference
-            android:key="qs_tile_animation_interpolator"
-            android:title="@string/qs_tile_animation_interpolator_title"
-            android:entries="@array/qs_tile_animation_interpolator_entries"
-            android:entryValues="@array/qs_tile_animation_interpolator_values"
-            android:persistent="false" />
-
-        <com.spark.settings.preferences.SystemSettingListPreference
-            android:key="custom_transitions_page_tile"
-            android:entries="@array/qs_transitions_entries"
-            android:entryValues="@array/qs_transitions_values"
-            android:summary="%s"
-            android:title="@string/qs_transitions_title" />
-
         <com.spark.settings.preferences.SystemSettingListPreference
             android:key="qs_panel_style"
             android:title="@string/qs_styles_title"
@@ -161,6 +133,36 @@
             android:entries="@array/qs_styles_entries"
             android:entryValues="@array/qs_styles_values"
             android:defaultValue="0" />
+
+        <com.spark.settings.preferences.SystemSettingListPreference
+            android:key="custom_transitions_page_tile"
+            android:entries="@array/qs_transitions_entries"
+            android:entryValues="@array/qs_transitions_values"
+            android:summary="%s"
+            android:title="@string/qs_transitions_title" />
+
+        <ListPreference
+            android:key="qs_tile_animation_style"
+            android:title="@string/qs_tile_animation_style_title"
+            android:entries="@array/qs_tile_animation_style_entries"
+            android:entryValues="@array/qs_tile_animation_style_values"
+            android:persistent="false" />
+
+        <com.spark.settings.preferences.SystemSettingSeekBarPreference
+            android:key="qs_tile_animation_duration"
+            android:title="@string/qs_tile_animation_duration_title"
+            android:defaultValue="1"
+            settings:interval="1"
+            settings:units="@string/unit_seconds"
+            android:max="5"
+            android:min="1" />
+
+        <ListPreference
+            android:key="qs_tile_animation_interpolator"
+            android:title="@string/qs_tile_animation_interpolator_title"
+            android:entries="@array/qs_tile_animation_interpolator_entries"
+            android:entryValues="@array/qs_tile_animation_interpolator_values"
+            android:persistent="false" />
 
     </PreferenceCategory>
 

@@ -92,7 +92,7 @@ public class ThemeSettings extends SettingsPreferenceFragment implements
     private SystemSettingListPreference mQsStyle;
     private SystemSettingListPreference mSettingsDashBoardStyle;
     private ListPreference mTileAnimationStyle;
-    private ListPreference mTileAnimationDuration;
+    private CustomSeekBarPreference mTileAnimationDuration;
     private SystemSettingListPreference mAboutPhoneStyle;
     private ListPreference mTileAnimationInterpolator;
     private SystemSettingSwitchPreference mUseStockLayout;
@@ -179,11 +179,10 @@ public class ThemeSettings extends SettingsPreferenceFragment implements
         updateAnimTileStyle(tileAnimationStyle);
         mTileAnimationStyle.setOnPreferenceChangeListener(this);
 
-        mTileAnimationDuration = (ListPreference) findPreference(PREF_TILE_ANIM_DURATION);
+        mTileAnimationDuration = (CustomSeekBarPreference) findPreference(PREF_TILE_ANIM_DURATION);
         int tileAnimationDuration = Settings.System.getIntForUser(resolver,
-                Settings.System.QS_TILE_ANIMATION_DURATION, 2000, UserHandle.USER_CURRENT);
-        mTileAnimationDuration.setValue(String.valueOf(tileAnimationDuration));
-        updateTileAnimationDurationSummary(tileAnimationDuration);
+                Settings.System.QS_TILE_ANIMATION_DURATION, 1, UserHandle.USER_CURRENT);
+        mTileAnimationDuration.setValue(tileAnimationDuration);
         mTileAnimationDuration.setOnPreferenceChangeListener(this);
 
         mTileAnimationInterpolator = (ListPreference) findPreference(PREF_TILE_ANIM_INTERPOLATOR);
@@ -267,10 +266,9 @@ public class ThemeSettings extends SettingsPreferenceFragment implements
             updateAnimTileStyle(tileAnimationStyle);
             return true;
         } else if (preference == mTileAnimationDuration) {
-            int tileAnimationDuration = Integer.valueOf((String) newValue);
+            int tileAnimationDuration = (Integer) newValue;
             Settings.System.putIntForUser(resolver, Settings.System.QS_TILE_ANIMATION_DURATION,
                     tileAnimationDuration, UserHandle.USER_CURRENT);
-            updateTileAnimationDurationSummary(tileAnimationDuration);
             return true;
         } else if (preference == mTileAnimationInterpolator) {
             int tileAnimationInterpolator = Integer.valueOf((String) newValue);
@@ -426,12 +424,6 @@ public class ThemeSettings extends SettingsPreferenceFragment implements
         String prefix = (String) mTileAnimationStyle.getEntries()[mTileAnimationStyle.findIndexOfValue(String
                 .valueOf(tileAnimationStyle))];
         mTileAnimationStyle.setSummary(getResources().getString(R.string.qs_set_animation_style, prefix));
-    }
-
-     private void updateTileAnimationDurationSummary(int tileAnimationDuration) {
-        String prefix = (String) mTileAnimationDuration.getEntries()[mTileAnimationDuration.findIndexOfValue(String
-                .valueOf(tileAnimationDuration))];
-        mTileAnimationDuration.setSummary(getResources().getString(R.string.qs_set_animation_duration, prefix));
     }
 
     private void updateTileAnimationInterpolatorSummary(int tileAnimationInterpolator) {
