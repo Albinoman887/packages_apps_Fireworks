@@ -769,6 +769,7 @@
     <string name="settings_dashboard_style_aosp">Stock pixel</string>
     <string name="settings_dashboard_style_mt">Google material you</string>
     <string name="settings_dashboard_style_card">Ayan\'s card ui</string>
+    <string name="settings_dashboard_style_dot">DotOS</string>
     <string name="settings_home_style_title">Searchbar style</string>
     <string name="settings_home_style_summary">Use AOSP settings homepage style</string>
     <string name="settings_user_card_title">Hide user card preference</string>

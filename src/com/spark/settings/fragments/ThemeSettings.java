@@ -349,6 +349,9 @@ public class ThemeSettings extends SettingsPreferenceFragment implements
             case 5:
               setSettingsStyle("com.android.system.settings.card");
               break;
+            case 6:
+              setSettingsStyle("com.android.system.settings.dot");
+              break;
             default:
               break;
         }
