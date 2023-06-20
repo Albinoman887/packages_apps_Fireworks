@@ -660,6 +660,8 @@
 
     <!-- Tiles animation duration -->
     <string-array name="qs_tile_animation_duration_entries" translatable="false">
+        <item>@string/qs_tile_animation_duration_slowest</item>
+        <item>@string/qs_tile_animation_duration_slower</item>
         <item>@string/qs_tile_animation_duration_slow</item>
         <item>@string/qs_tile_animation_duration_default</item>
         <item>@string/qs_tile_animation_duration_fast</item>
@@ -668,11 +670,13 @@
     </string-array>
 
     <string-array name="qs_tile_animation_duration_values" translatable="false">
-        <item>2500</item> <!-- Slow -->
-        <item>2000</item> <!-- Default -->
-        <item>1500</item> <!-- Fast -->
-        <item>1000</item> <!-- Faster -->
-        <item>500</item> <!-- Fastest -->
+        <item>2250</item> <!-- Slowest -->
+        <item>2000</item> <!-- Slower -->
+        <item>1750</item> <!-- Slow -->
+        <item>1500</item> <!-- Default -->
+        <item>1000</item> <!-- Fast -->
+        <item>500</item> <!-- Faster -->
+        <item>250</item> <!-- Fastest -->
     </string-array>
 
     <!-- Tiles animation interpolator -->

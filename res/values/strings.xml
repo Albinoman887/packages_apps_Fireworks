@@ -868,6 +868,8 @@
     <string name="qs_tile_animation_style_off">No animation</string>
     <string name="qs_tile_animation_style_flip">Flip</string>
     <string name="qs_tile_animation_style_rotate">Rotate</string>
+    <string name="qs_tile_animation_duration_slowest">Slowest</string>
+    <string name="qs_tile_animation_duration_slower">Slower</string>
     <string name="qs_tile_animation_duration_slow">Slow</string>
     <string name="qs_tile_animation_duration_default">Default</string>
     <string name="qs_tile_animation_duration_fast">Fast</string>
